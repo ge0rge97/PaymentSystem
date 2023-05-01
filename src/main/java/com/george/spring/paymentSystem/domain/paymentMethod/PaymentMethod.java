@@ -6,11 +6,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public abstract class PaymentMethod {
+public class PaymentMethod {
     private Long id;
     private Long number;
     private Double currentBalance;
     private PaymentMethodType paymentMethodType;
     private User user;
-    public abstract PaymentMethodType getType();
 }
