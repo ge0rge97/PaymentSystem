@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 public class PaymentDto {
     private Long id;
-    private LocalDateTime date;
+    private LocalDateTime paymentDate;
     private Double amount;
     private User receiver;
     private User sender;
