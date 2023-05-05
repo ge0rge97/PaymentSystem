@@ -19,7 +19,8 @@ public class PaymentMethodRepositoryImpl implements PaymentMethodRepository {
             SELECT  pm.id as payment_method_id,
                     pm.number as payment_method_number,
                     pm.current_balance as payment_method_current_balance,
-                    pm.payment_method_type as payment_method_payment_method_type
+                    pm.payment_method_type as payment_method_payment_method_type,
+//                    pm.user_id as payment_method_user_id
             FROM payment_method pm
             WHERE id = ?""";
     private final String FIND_BY_NUMBER = """
@@ -28,14 +29,14 @@ public class PaymentMethodRepositoryImpl implements PaymentMethodRepository {
                     pm.current_balance as payment_method_current_balance,
                     pm.payment_method_type as payment_method_payment_method_type
             FROM payment_method pm
-            WHERE id = ?""";
+            WHERE number = ?""";
     private final String FIND_ALL_BY_USER_ID = """
             SELECT pm.id as payment_method_id,
                     pm.number as payment_method_number,
                     pm.current_balance as payment_method_current_balance,
                     pm.payment_method_type as payment_method_payment_method_type
             FROM payment_method pm
-              JOIN users u on pm.user_id = u.id
+            JOIN users u on pm.user_id = u.id
             WHERE u.id = ?""";
     private final String CREATE = """
             INSERT INTO payment_method (number, current_balance, payment_method_type, user_id) 
