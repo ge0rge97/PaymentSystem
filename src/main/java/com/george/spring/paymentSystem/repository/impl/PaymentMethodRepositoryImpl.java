@@ -20,14 +20,22 @@ public class PaymentMethodRepositoryImpl implements PaymentMethodRepository {
                     pm.number as payment_method_number,
                     pm.current_balance as payment_method_current_balance,
                     pm.payment_method_type as payment_method_payment_method_type,
-//                    pm.user_id as payment_method_user_id
+                    u.id as user_id,
+                    u.username as user_username,
+                    u.password as user_password
             FROM payment_method pm
+            JOIN users u ON pm.user_id = u.id
             WHERE id = ?""";
     private final String FIND_BY_NUMBER = """
             SELECT pm.id as payment_method_id,
                     pm.number as payment_method_number,
                     pm.current_balance as payment_method_current_balance,
-                    pm.payment_method_type as payment_method_payment_method_type
+                    pm.payment_method_type as payment_method_payment_method_type,
+                    u.id as user_id,
+                    u.username as user_username,
+                    u.password as user_password
+            FROM payment_method pm
+            JOIN users u ON pm.user_id = u.id
             FROM payment_method pm
             WHERE number = ?""";
     private final String FIND_ALL_BY_USER_ID = """

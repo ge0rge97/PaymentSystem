@@ -4,7 +4,6 @@ package com.george.spring.paymentSystem.repository.mapper;
 import com.george.spring.paymentSystem.domain.paymentMethod.PaymentMethod;
 import com.george.spring.paymentSystem.domain.paymentMethod.PaymentMethodType;
 import com.george.spring.paymentSystem.domain.user.User;
-import com.george.spring.paymentSystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 
@@ -22,9 +21,14 @@ public class PaymentMethodRowMapper {
             paymentMethod.setNumber(resultSet.getLong("payment_method_number"));
             paymentMethod.setCurrentBalance(resultSet.getDouble("payment_method_current_balance"));
             paymentMethod.setPaymentMethodType(PaymentMethodType.valueOf(resultSet.getString("payment_method_payment_method_type")));
-//            User user = userRepository.findById(resultSet.getLong("payment_method_user_id"))
-//                    .orElseThrow();
-            return paymentMethod;
+
+            User user = new User();
+            user.setId(resultSet.getLong("user_id"));
+            user.setUsername(resultSet.getString("user_username"));
+            user.setPassword(resultSet.getString("user_password"));
+            paymentMethod.setUser(user);
+
+          return paymentMethod;
         }
         return null;
     }
@@ -38,6 +42,12 @@ public class PaymentMethodRowMapper {
                 paymentMethod.setNumber(resultSet.getLong("payment_method_number"));
                 paymentMethod.setCurrentBalance(resultSet.getDouble("payment_method_current_balance"));
                 paymentMethod.setPaymentMethodType(PaymentMethodType.valueOf(resultSet.getString("payment_method_payment_method_type")));
+
+                User user = new User();
+                user.setId(resultSet.getLong("user_id"));
+                user.setUsername(resultSet.getString("user_username"));
+                user.setPassword(resultSet.getString("user_password"));
+                paymentMethod.setUser(user);
             }
             paymentMethods.add(paymentMethod);
         }
