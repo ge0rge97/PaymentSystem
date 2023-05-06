@@ -42,7 +42,10 @@ public class PaymentMethodRepositoryImpl implements PaymentMethodRepository {
             SELECT pm.id as payment_method_id,
                     pm.number as payment_method_number,
                     pm.current_balance as payment_method_current_balance,
-                    pm.payment_method_type as payment_method_payment_method_type
+                    pm.payment_method_type as payment_method_payment_method_type,
+                    u.id as user_id,
+                    u.username as user_username,
+                    u.password as user_password
             FROM payment_method pm
             JOIN users u on pm.user_id = u.id
             WHERE u.id = ?""";

@@ -1,7 +1,9 @@
 package com.george.spring.paymentSystem.web.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+@Data
 public class UserDto {
     private Long id;
     private String username;
