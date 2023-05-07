@@ -28,7 +28,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
             FROM payment p
             LEFT JOIN users s ON p.sender_id = s.id
             LEFT JOIN users r ON p.receiver_id = r.id
-            WHERE id = ?""";
+            WHERE p.id = ?""";
     private final String FIND_ALL_BY_USER_ID = """
             SELECT  p.id as payment_id,
                     p.payment_date as payment_date,
