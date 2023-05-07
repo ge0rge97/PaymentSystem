@@ -42,7 +42,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
             FROM payment p
             LEFT JOIN users s ON p.sender_id = s.id
             LEFT JOIN users r ON p.receiver_id = r.id
-            WHERE p.receiver_id = ? OR p.sender_id = ?""";
+            WHERE p.receiver_id OR p.sender_id = ?""";
     private final String CREATE = """
             INSERT INTO payment (payment_date, amount, receiver_id, sender_id)
             VALUES (?, ?, ?, ?)""";
@@ -87,8 +87,8 @@ public class PaymentRepositoryImpl implements PaymentRepository {
                 statement.setTimestamp(1, Timestamp.valueOf(payment.getPaymentDate()));
             }
             statement.setDouble(2, payment.getAmount());
-            statement.setLong(3, payment.getReceiver().getId());
-            statement.setLong(4, payment.getSender().getId());
+            statement.setLong(3, receiverId);
+            statement.setLong(4, senderId);
             statement.executeUpdate();
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 resultSet.next();

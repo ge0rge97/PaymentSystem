@@ -10,6 +10,6 @@ public class PaymentDto {
     private Long id;
     private LocalDateTime paymentDate;
     private Double amount;
-    private UserDto receiver;
     private UserDto sender;
+    private UserDto receiver;
 }

@@ -5,10 +5,7 @@ import com.george.spring.paymentSystem.service.PaymentMethodService;
 import com.george.spring.paymentSystem.web.dto.mappers.PaymentMethodMapper;
 import com.george.spring.paymentSystem.web.dto.paymentMethod.PaymentMethodDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/paymentMethods")
@@ -21,5 +18,9 @@ public class PaymentMethodController {
     public PaymentMethodDto getById(@PathVariable Long id) {
         PaymentMethod paymentMethod = paymentMethodService.getById(id);
         return paymentMethodMapper.toDto(paymentMethod);
+    }
+    @DeleteMapping("/{id}")
+    public void deletePaymentMethodById(@PathVariable Long id) {
+        paymentMethodService.delete(id);
     }
 }
