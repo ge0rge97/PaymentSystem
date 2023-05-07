@@ -25,7 +25,7 @@ public class PaymentMethodRepositoryImpl implements PaymentMethodRepository {
                     u.password as user_password
             FROM payment_method pm
             JOIN users u ON pm.user_id = u.id
-            WHERE id = ?""";
+            WHERE pm.id = ?""";
     private final String FIND_BY_NUMBER = """
             SELECT pm.id as payment_method_id,
                     pm.number as payment_method_number,

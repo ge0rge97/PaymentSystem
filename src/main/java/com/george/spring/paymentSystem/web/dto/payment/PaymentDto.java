@@ -1,6 +1,6 @@
 package com.george.spring.paymentSystem.web.dto.payment;
 
-import com.george.spring.paymentSystem.domain.user.User;
+import com.george.spring.paymentSystem.web.dto.user.UserDto;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -10,6 +10,6 @@ public class PaymentDto {
     private Long id;
     private LocalDateTime paymentDate;
     private Double amount;
-    private User receiver;
-    private User sender;
+    private UserDto receiver;
+    private UserDto sender;
 }

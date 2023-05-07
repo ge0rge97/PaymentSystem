@@ -24,7 +24,7 @@ public class UserRepositoryImpl implements UserRepository {
                pm.id as payment_method_id,
                pm.number as payment_method_number,
                pm.current_balance as payment_method_current_balance,
-               pm.payment_method_type as payment_method_type,
+               pm.payment_method_type as payment_method_payment_method_type,
                p.id as payment_id,
                p.payment_date as payment_date,
                p.amount as payment_amount,

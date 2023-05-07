@@ -27,15 +27,20 @@ public class UserController {
         User user = userService.getById(id);
         return userMapper.toDto(user);
     }
-    @GetMapping("/{id}/payment_methods")
+    @GetMapping("/{id}/paymentMethods")
     public List<PaymentMethodDto> getPaymentMethodsById(@PathVariable Long id) {
         List<PaymentMethod> paymentMethods = paymentMethodService.getAllByUserId(id);
         return paymentMethodMapper.toDto(paymentMethods);
     }
-    @PostMapping("/{id}/payment_methods")
-    public PaymentMethodDto createPaymentMethod(@PathVariable Long id, @RequestBody PaymentMethodDto paymentMethodDto) {
+    @PostMapping("/{id}/paymentMethods")
+    public PaymentMethodDto createPaymentMethod(@PathVariable Long id,
+                                                @RequestBody PaymentMethodDto paymentMethodDto) {
         PaymentMethod paymentMethod = paymentMethodMapper.toEntity(paymentMethodDto);
         PaymentMethod createdPaymentMethod = paymentMethodService.create(paymentMethod, id);
         return paymentMethodMapper.toDto(createdPaymentMethod);
+    }
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        userService.delete(id);
     }
 }
