@@ -51,7 +51,9 @@ public class UserController {
         return paymentMethodMapper.toDto(createdPaymentMethod);
     }
     @PostMapping("/{senderId}/payment/{receiverId}")
-    public PaymentDto createPayment(@PathVariable Long senderId, @PathVariable Long receiverId, @RequestBody PaymentDto paymentDto) {
+    public PaymentDto createPayment(@PathVariable Long senderId,
+                                    @PathVariable Long receiverId,
+                                    @RequestBody PaymentDto paymentDto) {
         Payment payment = paymentMapper.toEntity(paymentDto);
         Payment createdPayment = paymentService.create(payment, receiverId, senderId);
         return  paymentMapper.toDto(createdPayment);
