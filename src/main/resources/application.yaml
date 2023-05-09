@@ -11,3 +11,8 @@ spring:
     change-log: classpath:liquibase/db.changelog.yaml
     enabled: true
     default-schema: payment_system
+security:
+  jwt:
+    secret: dmtkbXZsZHNkZm5yaXdldzMwMjNpOTRqZnZwc1tkZGZrbXdlbWZrd24=
+    access: 3600000
+    refresh: 259200000

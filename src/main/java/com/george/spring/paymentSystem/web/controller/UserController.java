@@ -28,7 +28,7 @@ public class UserController {
     private final PaymentMethodMapper paymentMethodMapper;
     private final PaymentMapper paymentMapper;
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public UserDto getById(@PathVariable Long id) {
         User user = userService.getById(id);
         return userMapper.toDto(user);

@@ -36,9 +36,20 @@ public class UserRepositoryImpl implements UserRepository {
         WHERE u.id = ?""";
     private final String FIND_BY_USERNAME = """
         SELECT u.id as user_id,
-                u.username as user_username,
-                u.password as user_password
+               u.username as user_username,
+               u.password as user_password,
+               pm.id as payment_method_id,
+               pm.number as payment_method_number,
+               pm.current_balance as payment_method_current_balance,
+               pm.payment_method_type as payment_method_payment_method_type,
+               p.id as payment_id,
+               p.payment_date as payment_date,
+               p.amount as payment_amount,
+               p.receiver_id as payment_receiver_id,
+               p.sender_id as payment_sender_id
         FROM users u
+        LEFT JOIN payment_method pm ON u.id = pm.user_id
+        LEFT JOIN payment p ON u.id = p.receiver_id OR u.id = p.sender_id
         WHERE u.username = ?""";
     private final String CREATE = """
             INSERT INTO users (username, password, password_confirmation)
