@@ -13,6 +13,6 @@ spring:
     default-schema: payment_system
 security:
   jwt:
-    secret: dmtkbXZsZHNkZm5yaXdldzMwMjNpOTRqZnZwc1tkZGZrbXdlbWZrd24=
+    secret: YWZkb2pnbnNkZ292ZHNudmFkc2Fwb2d2d2RwZ3dlZmdqd1tvdmlqc2FkaW92YWRqc2ZidmlvZWZpanB3W2dpag==
     access: 3600000
     refresh: 259200000

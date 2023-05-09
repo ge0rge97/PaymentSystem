@@ -15,13 +15,12 @@ import java.io.IOException;
 @AllArgsConstructor
 public class JwtTokenFilter extends GenericFilterBean {
     private final JwtTokenProvider jwtTokenProvider;
+
     @Override
-    public void doFilter(ServletRequest servletRequest,
-                         ServletResponse servletResponse,
-                         FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         String bearerToken = ((HttpServletRequest) servletRequest).getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            bearerToken.substring(7);
+            bearerToken = bearerToken.substring(7);
         }
         if (bearerToken != null && jwtTokenProvider.validateToken(bearerToken)) {
             try {
@@ -29,7 +28,8 @@ public class JwtTokenFilter extends GenericFilterBean {
                 if (authentication != null) {
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
-            } catch (RuntimeException ignore) { }
+            } catch (RuntimeException ignored) {
+            }
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }

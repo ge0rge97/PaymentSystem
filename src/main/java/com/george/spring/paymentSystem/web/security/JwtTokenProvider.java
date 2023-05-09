@@ -95,6 +95,33 @@ public class JwtTokenProvider {
                 .getBody()
                 .getSubject();
     }
+//    public boolean validateToken(String token) {
+//        Jws<Claims> claims = Jwts
+//                .parserBuilder()
+//                .setSigningKey(key)
+//                .build()
+//                .parseClaimsJws(token);
+//        return !claims.getBody().getExpiration().before(new Date());
+//    }
+//    private String getId(String token) {
+//        return Jwts
+//                .parserBuilder()
+//                .setSigningKey(key)
+//                .build()
+//                .parseClaimsJws(token)
+//                .getBody()
+//                .get("id")
+//                .toString();
+//    }
+//    private String getUsername(String token) {
+//        return Jwts
+//                .parserBuilder()
+//                .setSigningKey(key)
+//                .build()
+//                .parseClaimsJws(token)
+//                .getBody()
+//                .getSubject();
+//    }
     public Authentication getAuthentication(String token) {
         String username = getUsername(token);
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
