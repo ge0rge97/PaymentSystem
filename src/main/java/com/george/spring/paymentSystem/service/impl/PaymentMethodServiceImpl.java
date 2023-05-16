@@ -1,6 +1,7 @@
 package com.george.spring.paymentSystem.service.impl;
 
 import com.george.spring.paymentSystem.domain.paymentMethod.PaymentMethod;
+import com.george.spring.paymentSystem.exception.ResourceNotFoundException;
 import com.george.spring.paymentSystem.repository.PaymentMethodRepository;
 import com.george.spring.paymentSystem.service.PaymentMethodService;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +17,12 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
     @Override
     public PaymentMethod getById(Long id) {
         return paymentMethodRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Payment Method not Found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Payment method not found."));
     }
     @Override
     public PaymentMethod getByNumber(Long number) {
         return paymentMethodRepository.findByNumber(number)
-                .orElseThrow(() -> new RuntimeException("Payment Method not Found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Payment method not found."));
     }
     @Override
     public List<PaymentMethod> getAllByUserId(Long userId) {
@@ -29,6 +30,9 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
     }
     @Override
     public PaymentMethod create(PaymentMethod paymentMethod, Long userId) {
+        if (paymentMethodRepository.findByNumber(paymentMethod.getNumber()).isPresent()) {
+            throw new IllegalStateException("Payment method already create.");
+        }
         paymentMethodRepository.create(paymentMethod, userId);
         return paymentMethod;
     }

@@ -1,6 +1,7 @@
 package com.george.spring.paymentSystem.repository.impl;
 
 import com.george.spring.paymentSystem.domain.user.User;
+import com.george.spring.paymentSystem.exception.ResourceMappingException;
 import com.george.spring.paymentSystem.repository.DataSourceConfig;
 import com.george.spring.paymentSystem.repository.UserRepository;
 import com.george.spring.paymentSystem.repository.mapper.UserRowMapper;
@@ -70,7 +71,7 @@ public class UserRepositoryImpl implements UserRepository {
                 return Optional.ofNullable(UserRowMapper.mapRow(resultSet));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ResourceMappingException("Error while finding user by id.");
         }
     }
     @Override
@@ -85,7 +86,7 @@ public class UserRepositoryImpl implements UserRepository {
                 return Optional.ofNullable(UserRowMapper.mapRow(resultSet));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ResourceMappingException("Error while finding user by username.");
         }
     }
     @Override
@@ -102,7 +103,7 @@ public class UserRepositoryImpl implements UserRepository {
                 user.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ResourceMappingException("Error while creating new user.");
         }
     }
     @Override
@@ -113,7 +114,7 @@ public class UserRepositoryImpl implements UserRepository {
             statement.setLong(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ResourceMappingException("Error while deleting user.");
         }
     }
 }

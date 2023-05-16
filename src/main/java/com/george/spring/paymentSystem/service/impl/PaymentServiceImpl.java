@@ -2,6 +2,7 @@ package com.george.spring.paymentSystem.service.impl;
 
 import com.george.spring.paymentSystem.domain.payment.Payment;
 import com.george.spring.paymentSystem.domain.user.User;
+import com.george.spring.paymentSystem.exception.ResourceNotFoundException;
 import com.george.spring.paymentSystem.repository.PaymentRepository;
 import com.george.spring.paymentSystem.repository.UserRepository;
 import com.george.spring.paymentSystem.service.PaymentService;
@@ -20,7 +21,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public Payment getById(Long id) {
         return paymentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Payment not Found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Payment not Found."));
     }
     @Override
     public List<Payment> getAllByUserId(Long userId) {
@@ -29,9 +30,9 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public Payment create(Payment payment, Long receiverId, Long senderId) {
         User receiver = userRepository.findById(receiverId)
-                .orElseThrow(() -> new RuntimeException("Receiver not Found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Receiver not Found."));
         User sender = userRepository.findById(senderId)
-                .orElseThrow(() -> new RuntimeException("Sender not Found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Sender not Found."));
         payment.setReceiver(receiver);
         payment.setSender(sender);
         payment.setPaymentDate(LocalDateTime.now());

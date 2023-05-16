@@ -1,6 +1,7 @@
 package com.george.spring.paymentSystem.repository.impl;
 
 import com.george.spring.paymentSystem.domain.paymentMethod.PaymentMethod;
+import com.george.spring.paymentSystem.exception.ResourceMappingException;
 import com.george.spring.paymentSystem.repository.DataSourceConfig;
 import com.george.spring.paymentSystem.repository.PaymentMethodRepository;
 import com.george.spring.paymentSystem.repository.mapper.PaymentMethodRowMapper;
@@ -66,7 +67,7 @@ public class PaymentMethodRepositoryImpl implements PaymentMethodRepository {
                 return Optional.ofNullable(PaymentMethodRowMapper.mapRow(resultSet));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ResourceMappingException("Error while finding payment method by id.");
         }
     }
     @Override
@@ -79,7 +80,7 @@ public class PaymentMethodRepositoryImpl implements PaymentMethodRepository {
                 return Optional.ofNullable(PaymentMethodRowMapper.mapRow(resultSet));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ResourceMappingException("Error while finding payment method by number.");
         }
     }
     @Override
@@ -92,7 +93,7 @@ public class PaymentMethodRepositoryImpl implements PaymentMethodRepository {
                 return PaymentMethodRowMapper.mapRows(resultSet);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ResourceMappingException("Error while finding payment method.");
         }
     }
     @Override
@@ -110,7 +111,7 @@ public class PaymentMethodRepositoryImpl implements PaymentMethodRepository {
                 paymentMethod.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ResourceMappingException("Error while creating payment method.");
         }
     }
     @Override
@@ -121,7 +122,7 @@ public class PaymentMethodRepositoryImpl implements PaymentMethodRepository {
             statement.setLong(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ResourceMappingException("Error while deleting payment method.");
         }
     }
 }

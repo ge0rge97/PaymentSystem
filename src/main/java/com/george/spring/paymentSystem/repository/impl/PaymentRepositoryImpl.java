@@ -1,6 +1,7 @@
 package com.george.spring.paymentSystem.repository.impl;
 
 import com.george.spring.paymentSystem.domain.payment.Payment;
+import com.george.spring.paymentSystem.exception.ResourceMappingException;
 import com.george.spring.paymentSystem.repository.DataSourceConfig;
 import com.george.spring.paymentSystem.repository.PaymentRepository;
 import com.george.spring.paymentSystem.repository.mapper.PaymentRowMapper;
@@ -60,7 +61,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
                 return Optional.ofNullable(PaymentRowMapper.rowMapper(resultSet));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ResourceMappingException("Error while finding payment by id.");
         }
     }
     @Override
@@ -73,7 +74,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
                 return PaymentRowMapper.rowsMapper(resultSet);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ResourceMappingException("Error while finding payments.");
         }
     }
     @Override
@@ -95,7 +96,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
                 payment.setId(resultSet.getLong(1));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ResourceMappingException("Error while creating payment.");
         }
     }
     @Override
@@ -106,7 +107,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
             statement.setLong(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ResourceMappingException("Error while deleting payment.");
         }
     }
 }

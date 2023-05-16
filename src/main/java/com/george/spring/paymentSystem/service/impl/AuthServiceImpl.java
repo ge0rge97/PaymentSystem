@@ -18,7 +18,6 @@ public class AuthServiceImpl implements AuthService {
     private final UserService userService;
     private final JwtTokenProvider jwtTokenProvider;
 
-
     @Override
     public JwtResponse login(JwtRequest request) {
         JwtResponse jwtResponse = new JwtResponse();
